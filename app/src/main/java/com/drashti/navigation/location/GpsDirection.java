@@ -46,7 +46,6 @@ public class GpsDirection implements SensorEventListener {
 
             //System.out.println("degree " + degree);
             Toast.makeText(context, "Degree is " + degree, Toast.LENGTH_LONG).show();
-
         }
     }
 
