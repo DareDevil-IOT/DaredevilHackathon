@@ -88,12 +88,14 @@ public class StepOfPath {
         startLocation.setLongitude(start_location.getLng());
         return location.distanceTo(startLocation) < 1f;
     }
+
     public boolean isNearEndLocation(Location location) {
         Location endLocation = new Location("");
         endLocation.setLatitude(end_location.getLat());
         endLocation.setLongitude(end_location.getLng());
         return location.distanceTo(endLocation) < 1f;
     }
+
 
     public boolean isStepComplete() {
         return isStepComplete;
@@ -102,4 +104,5 @@ public class StepOfPath {
     public void setStepComplete(boolean stepComplete) {
         isStepComplete = stepComplete;
     }
+
 }
