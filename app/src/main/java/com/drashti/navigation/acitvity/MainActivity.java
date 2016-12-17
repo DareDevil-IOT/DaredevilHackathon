@@ -18,6 +18,7 @@ import com.drashti.navigation.location.GpsDirection;
 import com.drashti.navigation.services.BluetoothAcceptThread;
 import com.drashti.navigation.services.BluetoothService;
 import com.drashti.navigation.textToSpeech.Speaker;
+import com.drashti.navigation.services.LocationHandler;
 
 import static android.hardware.SensorManager.SENSOR_DELAY_NORMAL;
 import static android.hardware.SensorManager.SENSOR_DELAY_UI;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(bluetoothService.deviceListAdapter());
 
         gps = new GPSTracker(this);
+        gps.setLocationHandler(new LocationHandler());
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
