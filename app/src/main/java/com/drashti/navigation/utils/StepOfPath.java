@@ -1,5 +1,7 @@
 package com.drashti.navigation.utils;
 
+import android.location.Location;
+
 public class StepOfPath {
     private final Distance distance;
     private final Duration duration;
@@ -54,9 +56,12 @@ public class StepOfPath {
 
         StepOfPath that = (StepOfPath) o;
 
-        if (distance != null ? !distance.equals(that.distance) : that.distance != null) return false;
-        if (duration != null ? !duration.equals(that.duration) : that.duration != null) return false;
-        if (end_location != null ? !end_location.equals(that.end_location) : that.end_location != null) return false;
+        if (distance != null ? !distance.equals(that.distance) : that.distance != null)
+            return false;
+        if (duration != null ? !duration.equals(that.duration) : that.duration != null)
+            return false;
+        if (end_location != null ? !end_location.equals(that.end_location) : that.end_location != null)
+            return false;
         if (html_instructions != null ? !html_instructions.equals(that.html_instructions) : that.html_instructions != null)
             return false;
         if (start_location != null ? !start_location.equals(that.start_location) : that.start_location != null)
@@ -74,5 +79,12 @@ public class StepOfPath {
         result = 31 * result + (start_location != null ? start_location.hashCode() : 0);
         result = 31 * result + (travel_mode != null ? travel_mode.hashCode() : 0);
         return result;
+    }
+
+    public boolean isNearStartLocation(Location location) {
+        Location startLocation = new Location("");
+        startLocation.setLatitude(start_location.getLat());
+        startLocation.setLongitude(start_location.getLng());
+        return location.distanceTo(startLocation) < 1f;
     }
 }

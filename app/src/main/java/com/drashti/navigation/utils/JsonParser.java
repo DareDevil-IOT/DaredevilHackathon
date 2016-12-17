@@ -3,6 +3,7 @@ package com.drashti.navigation.utils;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class JsonParser {
 
@@ -45,7 +46,7 @@ public class JsonParser {
         return legs;
     }
 
-    public HashSet<StepOfPath> getAllStep(int routerIndex, int legIndex) {
+    public Set<StepOfPath> getAllStep(int routerIndex, int legIndex) {
         HashSet<StepOfPath> stepOfPaths = new HashSet<StepOfPath>();
         ArrayList<Leg> allLegsARoute = getAllLegsARoute(routerIndex);
         Leg leg = allLegsARoute.get(legIndex);

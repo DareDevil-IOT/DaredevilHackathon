@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(bluetoothService.deviceListAdapter());
 
         gps = new GPSTracker(this);
+        gps.setLocationHandler(new LocationHandler());
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
