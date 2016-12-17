@@ -9,13 +9,14 @@ import com.drashti.navigation.utils.JsonReader;
 
 import com.drashti.navigation.utils.StepOfPath;
 
+import java.util.List;
 import java.util.Set;
 
 public class LocationHandler {
     private final Speaker speaker;
-    private Set<StepOfPath> steps;
+    private List<StepOfPath> steps;
 
-    public LocationHandler(Set<StepOfPath> pathSet) {
+    public LocationHandler(List<StepOfPath> pathSet) {
         steps = pathSet;
         speaker = Speaker.getInstance();
     }
@@ -23,9 +24,15 @@ public class LocationHandler {
     public void handle(Location location) {
         for (StepOfPath step : steps) {
             if (step.isNearStartLocation(location)) {
-                System.out.println("start speaking:- "+step.getHtml_instructions());
+                System.out.println("start speaking:- " + step.getHtml_instructions());
                 speaker.speak(step.getHtml_instructions());
             }
+           /* if(step.isNearEndLocation(location) && nextInstruction == take turn){
+                if(isTurnTaken()){
+                    step is done;
+                }
+            }*/
+
         }
 
     }

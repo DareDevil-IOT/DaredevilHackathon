@@ -1,6 +1,7 @@
 package com.drashti.navigation.utils;
 
 import java.util.HashSet;
+import java.util.List;
 
 public class Leg {
     private final Distance distance;
@@ -9,7 +10,7 @@ public class Leg {
     private final EndLocation end_location;
     private final String start_address;
     private final StartLocation start_location;
-    private final HashSet<StepOfPath> steps;
+    private final List<StepOfPath> steps;
 
     public Distance getDistance() {
         return distance;
@@ -35,7 +36,7 @@ public class Leg {
         return start_location;
     }
 
-    public HashSet<StepOfPath> getSteps() {
+    public List<StepOfPath> getSteps() {
         return steps;
     }
 
@@ -46,7 +47,7 @@ public class Leg {
                EndLocation end_location,
                String start_address,
                StartLocation start_location,
-               HashSet<StepOfPath> steps) {
+               List<StepOfPath> steps) {
 
 
         this.distance = distance;

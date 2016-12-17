@@ -46,11 +46,11 @@ public class JsonParser {
         return legs;
     }
 
-    public Set<StepOfPath> getAllStep(int routerIndex, int legIndex) {
-        HashSet<StepOfPath> stepOfPaths = new HashSet<StepOfPath>();
+    public List<StepOfPath> getAllStep(int routerIndex, int legIndex) {
+        List<StepOfPath> stepOfPaths = new ArrayList<>();
         ArrayList<Leg> allLegsARoute = getAllLegsARoute(routerIndex);
         Leg leg = allLegsARoute.get(legIndex);
-        HashSet<StepOfPath> steps = leg.getSteps();
+        List<StepOfPath> steps = leg.getSteps();
         for (StepOfPath step : steps) {
             stepOfPaths.add(step);
         }
