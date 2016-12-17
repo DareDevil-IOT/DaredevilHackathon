@@ -1,4 +1,4 @@
-package com.drashti.navigation.textToSpeech;
+package com.drashti.navigation.SpeechManipulator;
 
 import android.content.Context;
 import android.os.Build;

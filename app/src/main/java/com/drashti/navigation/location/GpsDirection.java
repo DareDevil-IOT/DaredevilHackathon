@@ -44,7 +44,7 @@ public class GpsDirection implements SensorEventListener {
 
             float degree = (float) (Math.toDegrees(azimut) + 360) % 360;
 
-            //System.out.println("degree " + degree);
+            System.out.println("degree " + degree);
             Toast.makeText(context, "Degree is " + degree, Toast.LENGTH_LONG).show();
         }
     }

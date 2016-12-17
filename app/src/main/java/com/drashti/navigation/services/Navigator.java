@@ -3,7 +3,7 @@ package com.drashti.navigation.services;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
-import com.drashti.navigation.textToSpeech.Speaker;
+import com.drashti.navigation.SpeechManipulator.Speaker;
 
 /**
  * Created by sagarmaurya on 12/17/16.

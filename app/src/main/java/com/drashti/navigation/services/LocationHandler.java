@@ -3,7 +3,7 @@ package com.drashti.navigation.services;
 
 import android.location.Location;
 
-import com.drashti.navigation.textToSpeech.Speaker;
+import com.drashti.navigation.SpeechManipulator.Speaker;
 import com.drashti.navigation.utils.JsonParser;
 import com.drashti.navigation.utils.JsonReader;
 import com.drashti.navigation.utils.StepOfPath;
