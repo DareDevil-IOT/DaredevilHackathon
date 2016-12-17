@@ -11,12 +11,14 @@ import android.widget.Spinner;
 import com.drashti.navigation.R;
 import com.drashti.navigation.services.BluetoothAcceptThread;
 import com.drashti.navigation.services.BluetoothService;
+import com.drashti.navigation.textToSpeech.Speaker;
 
 import static android.widget.AdapterView.OnItemSelectedListener;
 import static com.drashti.navigation.R.id.spinner;
 
 public class MainActivity extends AppCompatActivity {
     BluetoothService bluetoothService;
+    Speaker speaker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bluetoothService = new BluetoothService(this);
         bluetoothService.createAdaptor();
+        speaker = Speaker.getInstance(getApplicationContext());
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(bluetoothService.deviceListAdapter());
 
@@ -46,11 +49,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-    }
 }

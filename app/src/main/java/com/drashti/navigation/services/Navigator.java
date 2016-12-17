@@ -1,5 +1,7 @@
 package com.drashti.navigation.services;
 
+import com.drashti.navigation.textToSpeech.Speaker;
+
 /**
  * Created by sagarmaurya on 12/17/16.
  */
@@ -15,6 +17,6 @@ public class Navigator {
     }
 
     public void notify(double average) {
-        System.out.println("notified----------------------");
+        Speaker.getInstance().speak("Obstacle detected at " + average/100.0);
     }
 }
