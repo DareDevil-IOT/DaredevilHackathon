@@ -3,12 +3,12 @@ package com.drashti.navigation.services;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.Stack;
+import java.util.LinkedList;
 
 public class ObstacleDetector {
     private final DataInputStream inputStream;
-    private final Stack<Integer> windowFrame = new Stack();
-    private int threshold = 200;
+    private final LinkedList<Integer> windowFrame = new LinkedList<>();
+    private int threshold = 100;
     private Navigator navigator = Navigator.getInstance();
 
     public ObstacleDetector(DataInputStream inputStream) {
@@ -36,15 +36,11 @@ public class ObstacleDetector {
 
     }
 
-    private int convertToInt(int byte1, int byte2) {
-        System.out.println("value 1 " + (0xFF & byte2 + (0xFF << 8) & byte1));
-        return 0xFF & byte1 + (0xFF << 8) & byte2;
-    }
-
     private void manageDataFrame(int datum) {
+        System.out.println("Frame " + windowFrame);
         if (windowFrame.size() == 5)
-            windowFrame.pop();
-        windowFrame.push(datum);
+            windowFrame.remove();
+        windowFrame.add(datum);
         double average = averageOfWindowFrame();
         checkForObstacle(average);
     }

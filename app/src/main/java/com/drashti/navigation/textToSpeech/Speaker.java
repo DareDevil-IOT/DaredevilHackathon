@@ -1,10 +1,11 @@
 package com.drashti.navigation.textToSpeech;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.RequiresApi;
 
-import java.util.List;
 import java.util.Locale;
 
 public class Speaker {
@@ -22,19 +23,20 @@ public class Speaker {
         });
     }
 
-    public static Speaker getInstance(Context context){
-        if(speaker == null) {
+    public static Speaker getInstance(Context context) {
+        if (speaker == null) {
             speaker = new Speaker(context);
         }
         return speaker;
 
     }
 
-    public static Speaker getInstance(){
+    public static Speaker getInstance() {
         return speaker;
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void speak(CharSequence textToSpeak) {
         tts.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, new Bundle(), "ajsf");
     }
