@@ -38,9 +38,10 @@ public class Speaker {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void speak(CharSequence textToSpeak) {
-        tts.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, new Bundle(), "ajsf");
-        while (tts.isSpeaking()){
-            System.out.println("Do something or nothing while speaking..");
+        while(tts.isSpeaking()){
+
         }
+        tts.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, new Bundle(), "ajsf");
+
     }
 }

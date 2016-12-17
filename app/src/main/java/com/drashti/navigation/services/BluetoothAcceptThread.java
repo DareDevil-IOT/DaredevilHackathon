@@ -2,6 +2,8 @@ package com.drashti.navigation.services;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -27,6 +29,7 @@ public class BluetoothAcceptThread extends Thread {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void run() {
         BluetoothSocket socket = null;
         boolean torun;

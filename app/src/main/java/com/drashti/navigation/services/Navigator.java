@@ -1,5 +1,8 @@
 package com.drashti.navigation.services;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import com.drashti.navigation.textToSpeech.Speaker;
 
 /**
@@ -16,7 +19,8 @@ public class Navigator {
         return navigator;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void notify(double average) {
-        Speaker.getInstance().speak("Obstacle detected at " + average/100.0);
+        Speaker.getInstance().speak("Obstacle detected at " + Math.round(average/100.0)+" meters");
     }
 }
