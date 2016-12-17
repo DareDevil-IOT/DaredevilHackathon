@@ -6,30 +6,24 @@ import android.location.Location;
 import com.drashti.navigation.SpeechManipulator.Speaker;
 import com.drashti.navigation.utils.JsonParser;
 import com.drashti.navigation.utils.JsonReader;
+
 import com.drashti.navigation.utils.StepOfPath;
 
-import java.io.IOException;
 import java.util.Set;
 
 public class LocationHandler {
-    private Set<StepOfPath> steps;
     private final Speaker speaker;
+    private Set<StepOfPath> steps;
 
-    public LocationHandler() {
-        JsonReader reader = new JsonReader();
-        try {
-            reader.read("/Users/sarveshjain/Desktop/IOT/SPI/DaredevilHackathon/app/src/main/java/data/spi_path.json");
-            JsonParser jsonParser = reader.parseJson();
-            steps = jsonParser.getAllStep(0, 0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public LocationHandler(Set<StepOfPath> pathSet) {
+        steps = pathSet;
         speaker = Speaker.getInstance();
     }
 
     public void handle(Location location) {
         for (StepOfPath step : steps) {
             if (step.isNearStartLocation(location)) {
+                System.out.println("start speaking:- "+step.getHtml_instructions());
                 speaker.speak(step.getHtml_instructions());
             }
         }

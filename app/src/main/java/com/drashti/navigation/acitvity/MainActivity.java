@@ -17,6 +17,13 @@ import com.drashti.navigation.services.BluetoothAcceptThread;
 import com.drashti.navigation.services.BluetoothService;
 import com.drashti.navigation.SpeechManipulator.Speaker;
 import com.drashti.navigation.services.LocationHandler;
+import com.drashti.navigation.utils.JsonParser;
+import com.drashti.navigation.utils.JsonReader;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import static android.hardware.SensorManager.SENSOR_DELAY_NORMAL;
 import static android.hardware.SensorManager.SENSOR_DELAY_UI;
@@ -31,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Sensor sensorAccelerometer;
     private Sensor sensorMagneticField;
     private GpsDirection gpsDirection;
+    private JsonParser parser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +51,13 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(bluetoothService.deviceListAdapter());
 
         gps = new GPSTracker(this);
-        gps.setLocationHandler(new LocationHandler());
+        InputStream inputStream = getResources().openRawResource(R.raw.spi_path);
+        try {
+            parser = JsonReader.parseJson(new BufferedReader(new InputStreamReader(inputStream)));
+            gps.setLocationHandler(new LocationHandler(parser.getAllStep(0, 0)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
