@@ -11,30 +11,6 @@ public class StepOfPath {
     private final String travel_mode;
     private boolean isStepComplete;
 
-    public Distance getDistance() {
-        return distance;
-    }
-
-    public Duration getDuration() {
-        return duration;
-    }
-
-    public EndLocation getEnd_location() {
-        return end_location;
-    }
-
-    public String getHtml_instructions() {
-        return html_instructions;
-    }
-
-    public StartLocation getStart_location() {
-        return start_location;
-    }
-
-    public String getTravel_mode() {
-        return travel_mode;
-    }
-
     public StepOfPath(Distance distance,
                       Duration duration,
                       EndLocation end_location,
@@ -48,6 +24,42 @@ public class StepOfPath {
         this.html_instructions = html_instructions;
         this.start_location = start_location;
         this.travel_mode = travel_mode;
+    }
+
+    public Distance getDistance() {
+        return distance;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public EndLocation getEnd_location() {
+        return end_location;
+    }
+    public Location endLocation(){
+      Location location = new Location("");
+      location.setLatitude(end_location.getLat());
+        location.setLongitude(end_location.getLng());
+        return location;
+    }
+    public Location startLocation(){
+      Location location = new Location("");
+      location.setLatitude(start_location.getLat());
+        location.setLongitude(start_location.getLng());
+        return location;
+    }
+
+    public String getHtml_instructions() {
+        return html_instructions.replaceAll("\\<.*?>", " ");
+    }
+
+    public StartLocation getStart_location() {
+        return start_location;
+    }
+
+    public String getTravel_mode() {
+        return travel_mode;
     }
 
     @Override
@@ -105,4 +117,16 @@ public class StepOfPath {
         isStepComplete = stepComplete;
     }
 
+    @Override
+    public String toString() {
+        return "StepOfPath{" +
+                "distance=" + distance +
+                ", duration=" + duration +
+                ", end_location=" + end_location +
+                ", html_instructions='" + html_instructions + '\'' +
+                ", start_location=" + start_location +
+                ", travel_mode='" + travel_mode + '\'' +
+                ", isStepComplete=" + isStepComplete +
+                '}';
+    }
 }

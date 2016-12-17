@@ -8,7 +8,7 @@ public class Distance {
         return text;
     }
 
-    public int getValue() {
+    public float getValue() {
         return value;
     }
 
@@ -36,4 +36,11 @@ public class Distance {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Distance{" +
+                "text='" + text + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

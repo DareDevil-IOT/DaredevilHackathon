@@ -11,11 +11,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.drashti.navigation.R;
+import com.drashti.navigation.SpeechManipulator.Speaker;
 import com.drashti.navigation.location.GPSTracker;
 import com.drashti.navigation.location.GpsDirection;
 import com.drashti.navigation.services.BluetoothAcceptThread;
 import com.drashti.navigation.services.BluetoothService;
-import com.drashti.navigation.SpeechManipulator.Speaker;
 import com.drashti.navigation.services.LocationHandler;
 import com.drashti.navigation.utils.JsonParser;
 import com.drashti.navigation.utils.JsonReader;
@@ -50,11 +50,14 @@ public class MainActivity extends AppCompatActivity {
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(bluetoothService.deviceListAdapter());
 
-        gps = new GPSTracker(this);
+
         InputStream inputStream = getResources().openRawResource(R.raw.spi_path);
+
         try {
             parser = JsonReader.parseJson(new BufferedReader(new InputStreamReader(inputStream)));
-            gps.setLocationHandler(new LocationHandler(parser.getAllStep(0, 0)));
+            LocationHandler locationHandler = new LocationHandler(parser.getAllStep(0, 0), getApplicationContext());
+            gps = new GPSTracker(this);
+            gps.setLocationHandler(locationHandler);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
     @Override
