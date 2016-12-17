@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bluetoothService = new BluetoothService(this);
         bluetoothService.createAdaptor();
-        System.out.println("on create");
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(bluetoothService.deviceListAdapter());
 
@@ -32,13 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("on resumr");
-                System.out.println("position  "+position);
-                System.out.println("size  "+bluetoothService.getBluetoothDeviceList().size());
                 //bluetoothService.populateListView();
                 BluetoothDevice selectedDevice = null;
                 if (position >= 1 && position < bluetoothService.getBluetoothDeviceList().size()) {
-                    System.out.println("postion selected");
                     selectedDevice = bluetoothService.getBluetoothDeviceList().get(position);
                     new BluetoothAcceptThread(selectedDevice).start();
                 }

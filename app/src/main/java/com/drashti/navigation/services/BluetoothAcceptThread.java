@@ -37,7 +37,8 @@ public class BluetoothAcceptThread extends Thread {
             InputStream mInputStream = socket.getInputStream();
             streamOut = new DataOutputStream(new BufferedOutputStream(mOutputStream));
             streamIn = new DataInputStream(new BufferedInputStream(mInputStream));
-            new ObstacleDetector(streamIn);
+            ObstacleDetector obstacleDetector = new ObstacleDetector(streamIn);
+            obstacleDetector.startListening();
 
         } catch (IOException e) {
             e.printStackTrace();
