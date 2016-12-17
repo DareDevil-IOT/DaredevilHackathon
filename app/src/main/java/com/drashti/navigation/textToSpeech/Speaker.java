@@ -37,5 +37,8 @@ public class Speaker {
 
     public void speak(CharSequence textToSpeak) {
         tts.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, new Bundle(), "ajsf");
+        while (tts.isSpeaking()){
+            System.out.println("Do something or nothing while speaking..")
+        }
     }
 }
