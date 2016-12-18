@@ -12,7 +12,7 @@ public class ObstacleDetector {
     public static final int WINDOW_SIZE = 3;
     private final DataInputStream inputStream;
     private final LinkedList<Integer> windowFrame = new LinkedList<>();
-    private int threshold = 100;
+    private int threshold = 200;
     private Navigator navigator = Navigator.getInstance();
     private boolean isObstacleDetected = false;
     private long timer = 0;
