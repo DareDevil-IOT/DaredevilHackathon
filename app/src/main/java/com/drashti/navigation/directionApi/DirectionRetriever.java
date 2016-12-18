@@ -38,7 +38,7 @@ public class DirectionRetriever {
                 sb.append(line);
             }
             try {
-                BufferedWriter out = new BufferedWriter(new FileWriter("/Users/sarveshjain/Desktop/IOT/SPI/DaredevilHackathon/app/src/main/res/raw/spi_theatre.json"));
+                BufferedWriter out = new BufferedWriter(new FileWriter("/Users/sarveshjain/Desktop/IOT/SPI/DaredevilHackathon/app/src/main/res/raw/twoturn.json"));
                 out.write(sb.toString());  //Replace with the string
                 out.close();
             } catch (IOException e) {

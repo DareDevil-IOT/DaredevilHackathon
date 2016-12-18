@@ -26,9 +26,10 @@ public class LocationHandler {
 
     public void handle(Location location) {
 
-        System.out.println("Next step  "+ nextStepIndex);
+        System.out.println("Next step  " + nextStepIndex);
         if (nextStepIndex > steps.size()) {
             //to do
+            speaker.speak("");
             return;
         }
 
@@ -49,9 +50,15 @@ public class LocationHandler {
             instructionTime = System.currentTimeMillis();
             this.nextStepIndex++;
 
-        } else if (currentStep.isOnJourney(location) && (System.currentTimeMillis() - instructionTime) / 1000 > 3) {
-            speaker.speak("Continue on same path for " + location.distanceTo(currentStep.endLocation()));
-            instructionTime = System.currentTimeMillis();
+        } else if (currentStep.isOnJourney(location)) {
+            if ((System.currentTimeMillis() - instructionTime) / 1000 > 5) {
+
+                speaker.speak("Continue on same path for " + Math.round(location.distanceTo(currentStep.endLocation()))+" meters");
+                instructionTime = System.currentTimeMillis();
+            }
+        } else {
+            speaker.speak("Reached Your Destination");
+            nextStepIndex++;
         }
 
     }
