@@ -98,7 +98,8 @@ public class StepOfPath {
         Location startLocation = new Location("");
         startLocation.setLatitude(start_location.getLat());
         startLocation.setLongitude(start_location.getLng());
-        return location.distanceTo(startLocation) < 1f;
+        System.out.println(location.distanceTo(startLocation));
+        return location.distanceTo(startLocation) < 10f;
     }
 
     public boolean isNearEndLocation(Location location) {

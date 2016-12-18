@@ -1,9 +1,16 @@
 package com.drashti.navigation.acitvity;
 
+import android.Manifest;
+import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +21,7 @@ import com.drashti.navigation.R;
 import com.drashti.navigation.SpeechManipulator.Speaker;
 import com.drashti.navigation.location.GPSTracker;
 import com.drashti.navigation.location.GpsDirection;
+import com.drashti.navigation.location.GpsListener;
 import com.drashti.navigation.services.BluetoothAcceptThread;
 import com.drashti.navigation.services.BluetoothService;
 import com.drashti.navigation.services.LocationHandler;
@@ -53,11 +61,27 @@ public class MainActivity extends AppCompatActivity {
 
         InputStream inputStream = getResources().openRawResource(R.raw.spi_path);
 
+        LocationManager locationManager = (LocationManager)
+                getSystemService(Context.LOCATION_SERVICE);
+
         try {
             parser = JsonReader.parseJson(new BufferedReader(new InputStreamReader(inputStream)));
             LocationHandler locationHandler = new LocationHandler(parser.getAllStep(0, 0), getApplicationContext());
-            gps = new GPSTracker(this);
-            gps.setLocationHandler(locationHandler);
+            //gps = new GPSTracker(this);
+            //gps.setLocationHandler(locationHandler);
+            GpsListener locationListener = new GpsListener(locationHandler, this);
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{
+                        android.Manifest.permission.ACCESS_FINE_LOCATION
+                }, 10);
+                ActivityCompat.requestPermissions(this, new String[]{
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                }, 10);
+            }
+            locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER, 2000, 2, locationListener);
         } catch (IOException e) {
             e.printStackTrace();
         }
