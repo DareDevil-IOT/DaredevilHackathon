@@ -134,10 +134,10 @@ public class StepOfPath {
     }
 
     public boolean isOnJourney(Location location) {
-        float distanceFromStart = location.distanceTo(endLocation());
-        float distanceFromEnd = location.distanceTo(startLocation());
+        float distanceFromEnd = location.distanceTo(endLocation());
+        float distanceFromStart = location.distanceTo(startLocation());
         float distance = getDistance().getValue();
         System.out.println("distance start  "+distanceFromStart+"end  "+distanceFromEnd+"   distance  "+distance);
-        return (distanceFromStart > 5) && (distance - distanceFromEnd) < 5;
+        return (distanceFromStart > 5) && distanceFromEnd > 5;
     }
 }
