@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.drashti.navigation.services.LocationHandler;
 
-public class GPSTracker extends Service implements LocationListener {
+public class GPSTracker extends Service implements LocationListener, Runnable {
 
     private final Context mContext;
 
@@ -217,7 +217,8 @@ public class GPSTracker extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(mContext, "Your Location is - \nLat: " + location.getLatitude() + "\nLong: " + location.getLongitude(), Toast.LENGTH_LONG).show();
+        System.out.println("location is  "+location);
+        //Toast.makeText(mContext, "Your Location is - \nLat: " + location.getLatitude() + "\nLong: " + location.getLongitude(), Toast.LENGTH_LONG).show();
         locationHandler.handle(location);
     }
 
@@ -238,4 +239,8 @@ public class GPSTracker extends Service implements LocationListener {
         return null;
     }
 
+    @Override
+    public void run() {
+
+    }
 }

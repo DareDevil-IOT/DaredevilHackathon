@@ -41,4 +41,12 @@ public class StartLocation {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "StartLocation{" +
+                "lat=" + lat +
+                ", lng=" + lng +
+                '}';
+    }
 }

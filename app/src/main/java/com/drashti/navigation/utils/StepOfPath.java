@@ -11,30 +11,6 @@ public class StepOfPath {
     private final String travel_mode;
     private boolean isStepComplete;
 
-    public Distance getDistance() {
-        return distance;
-    }
-
-    public Duration getDuration() {
-        return duration;
-    }
-
-    public EndLocation getEnd_location() {
-        return end_location;
-    }
-
-    public String getHtml_instructions() {
-        return html_instructions;
-    }
-
-    public StartLocation getStart_location() {
-        return start_location;
-    }
-
-    public String getTravel_mode() {
-        return travel_mode;
-    }
-
     public StepOfPath(Distance distance,
                       Duration duration,
                       EndLocation end_location,
@@ -48,6 +24,42 @@ public class StepOfPath {
         this.html_instructions = html_instructions;
         this.start_location = start_location;
         this.travel_mode = travel_mode;
+    }
+
+    public Distance getDistance() {
+        return distance;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public EndLocation getEnd_location() {
+        return end_location;
+    }
+    public Location endLocation(){
+      Location location = new Location("");
+      location.setLatitude(end_location.getLat());
+        location.setLongitude(end_location.getLng());
+        return location;
+    }
+    public Location startLocation(){
+      Location location = new Location("");
+      location.setLatitude(start_location.getLat());
+        location.setLongitude(start_location.getLng());
+        return location;
+    }
+
+    public String getHtml_instructions() {
+        return html_instructions.replaceAll("\\<.*?>", " ");
+    }
+
+    public StartLocation getStart_location() {
+        return start_location;
+    }
+
+    public String getTravel_mode() {
+        return travel_mode;
     }
 
     @Override
@@ -86,12 +98,36 @@ public class StepOfPath {
         Location startLocation = new Location("");
         startLocation.setLatitude(start_location.getLat());
         startLocation.setLongitude(start_location.getLng());
-        return location.distanceTo(startLocation) < 1f;
+        System.out.println(location.distanceTo(startLocation));
+        return location.distanceTo(startLocation) < 10f;
     }
+
     public boolean isNearEndLocation(Location location) {
         Location endLocation = new Location("");
         endLocation.setLatitude(end_location.getLat());
         endLocation.setLongitude(end_location.getLng());
         return location.distanceTo(endLocation) < 1f;
+    }
+
+
+    public boolean isStepComplete() {
+        return isStepComplete;
+    }
+
+    public void setStepComplete(boolean stepComplete) {
+        isStepComplete = stepComplete;
+    }
+
+    @Override
+    public String toString() {
+        return "StepOfPath{" +
+                "distance=" + distance +
+                ", duration=" + duration +
+                ", end_location=" + end_location +
+                ", html_instructions='" + html_instructions + '\'' +
+                ", start_location=" + start_location +
+                ", travel_mode='" + travel_mode + '\'' +
+                ", isStepComplete=" + isStepComplete +
+                '}';
     }
 }
