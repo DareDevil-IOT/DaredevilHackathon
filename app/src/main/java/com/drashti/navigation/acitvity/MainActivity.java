@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(bluetoothService.deviceListAdapter());
 
 
-        InputStream inputStream = getResources().openRawResource(R.raw.spi_path);
+        InputStream inputStream = getResources().openRawResource(R.raw.spi_theatre);
 
         LocationManager locationManager = (LocationManager)
                 getSystemService(Context.LOCATION_SERVICE);

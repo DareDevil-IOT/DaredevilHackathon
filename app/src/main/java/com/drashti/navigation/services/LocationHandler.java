@@ -13,35 +13,41 @@ public class LocationHandler {
     private final Speaker speaker;
     private List<StepOfPath> steps;
     private Context context;
+    private int nextStep;
+    private long instructionTime;
 
     public LocationHandler(List<StepOfPath> pathSet, Context context) {
         steps = pathSet;
         this.context = context;
         speaker = Speaker.getInstance();
+        nextStep = 1;
+        speaker.speak(steps.get(0).getHtml_instructions());
     }
 
     public void handle(Location location) {
-        System.out.println(steps);
-        for (StepOfPath step : steps) {
+        System.out.println("Next step  "+nextStep);
+        if (nextStep >= steps.size()) {
+            //to do
+            return;
+        }
 
-            if (step.isNearStartLocation(location)) {
-                float distanceFromStart = step.endLocation().distanceTo(location);
-                float distanceFromEnd = step.startLocation().distanceTo(location);
-                float distance = step.getDistance().getValue();
-                System.out.println("distance " + distance + "  frm end  " + distanceFromEnd + "  frm start  " + distanceFromStart);
-//                if (distanceFromStart > 0 && distanceFromEnd < distance) {
-//                    System.out.println("start speaking..");
-//                } else {
-//                    speaker.speak("I think, you are heading in wrong direction.");
-//                }
-                speaker.speak(step.getHtml_instructions().replaceAll("\\<.*?>", " "));
-            }
+        StepOfPath nextStep = steps.get(this.nextStep);
+        StepOfPath currentStep = steps.get(this.nextStep - 1);
+        float distanceFromStart = location.distanceTo(currentStep.endLocation());
+        float distanceFromEnd = location.distanceTo(currentStep.startLocation());
+        float distance = currentStep.getDistance().getValue();
 
-//
-//            if (step.isNearStartLocation(location)) {
-//                System.out.println("start speaking:- " + step.getHtml_instructions().replaceAll("\\<.*?>", " "));
-//                speaker.speak(step.getHtml_instructions().replaceAll("\\<.*?>", " "));
-//            }
+        System.out.println(" handle  distance " + distance + "  frm end  " + distanceFromEnd + "  frm start  " + distanceFromStart);
+        if (nextStep.isNearStartLocation(location)) {
+            System.out.println("Inside near start point");
+
+            speaker.speak(nextStep.getHtml_instructions().replaceAll("\\<.*?>", " "));
+            instructionTime = System.currentTimeMillis();
+            this.nextStep++;
+
+        } else if (currentStep.isOnJourney(location) && (System.currentTimeMillis() - instructionTime) / 1000 > 3) {
+            speaker.speak("Continue on same path for " + location.distanceTo(currentStep.endLocation()));
+            instructionTime = System.currentTimeMillis();
         }
 
     }

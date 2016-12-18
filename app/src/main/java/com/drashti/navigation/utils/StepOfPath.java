@@ -37,15 +37,17 @@ public class StepOfPath {
     public EndLocation getEnd_location() {
         return end_location;
     }
-    public Location endLocation(){
-      Location location = new Location("");
-      location.setLatitude(end_location.getLat());
+
+    public Location endLocation() {
+        Location location = new Location("");
+        location.setLatitude(end_location.getLat());
         location.setLongitude(end_location.getLng());
         return location;
     }
-    public Location startLocation(){
-      Location location = new Location("");
-      location.setLatitude(start_location.getLat());
+
+    public Location startLocation() {
+        Location location = new Location("");
+        location.setLatitude(start_location.getLat());
         location.setLongitude(start_location.getLng());
         return location;
     }
@@ -129,5 +131,13 @@ public class StepOfPath {
                 ", travel_mode='" + travel_mode + '\'' +
                 ", isStepComplete=" + isStepComplete +
                 '}';
+    }
+
+    public boolean isOnJourney(Location location) {
+        float distanceFromStart = location.distanceTo(endLocation());
+        float distanceFromEnd = location.distanceTo(startLocation());
+        float distance = getDistance().getValue();
+        System.out.println("distance start  "+distanceFromStart+"end  "+distanceFromEnd+"   distance  "+distance);
+        return (distanceFromStart > 5) && (distance - distanceFromEnd) < 5;
     }
 }
