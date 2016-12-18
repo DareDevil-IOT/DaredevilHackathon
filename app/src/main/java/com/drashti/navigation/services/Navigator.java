@@ -10,6 +10,7 @@ import com.drashti.navigation.SpeechManipulator.Speaker;
  */
 public class Navigator {
     private static Navigator navigator;
+    private int distance;
     private Navigator() {
     }
     public static Navigator getInstance(){
@@ -21,6 +22,10 @@ public class Navigator {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void notify(double average) {
-        Speaker.getInstance().speak("Obstacle detected at " + Math.round(average/100.0)+" meters");
+        distance = Math.round(average/100.0) == 0 ? (int) Math.round(average) : (int) Math.round(average / 100.0);
+        if(distance == 1)
+            Speaker.getInstance().speak("Obstacle detected at " + distance +" meter");
+        Speaker.getInstance().speak("Obstacle detected at " + distance +" centimeters");
+
     }
 }
