@@ -23,9 +23,13 @@ public class Navigator {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void notify(double average) {
         distance = Math.round(average/100.0) == 0 ? (int) Math.round(average) : (int) Math.round(average / 100.0);
-        if(distance == 1)
+        if(distance == 1){
             Speaker.getInstance().speak("Obstacle detected at " + distance +" meter");
-        Speaker.getInstance().speak("Obstacle detected at " + distance +" centimeters");
+        }else{
+            Speaker.getInstance().speak("Obstacle detected at " + distance +" centimeters");
+        }
+
+
 
     }
 }
