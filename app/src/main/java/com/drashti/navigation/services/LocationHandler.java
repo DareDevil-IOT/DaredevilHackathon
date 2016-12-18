@@ -15,12 +15,14 @@ public class LocationHandler {
     private Context context;
     private int nextStepIndex;
     private long instructionTime;
+    private StepOfPath destination;
 
     public LocationHandler(List<StepOfPath> pathSet, Context context) {
         steps = pathSet;
         this.context = context;
         speaker = Speaker.getInstance();
         nextStepIndex = 1;
+        destination = steps.get(steps.size() - 1);
         speaker.speak(steps.get(0).getHtml_instructions());
     }
 
@@ -53,11 +55,11 @@ public class LocationHandler {
         } else if (currentStep.isOnJourney(location)) {
             if ((System.currentTimeMillis() - instructionTime) / 1000 > 5) {
 
-                speaker.speak("Continue on same path for " + Math.round(location.distanceTo(currentStep.endLocation()))+" meters");
+                speaker.speak("Continue on same path for " + Math.round(location.distanceTo(currentStep.endLocation())) + " meters");
                 instructionTime = System.currentTimeMillis();
             }
-        } else {
-            speaker.speak("Reached Your Destination");
+        } else if (destination.isNearEndLocation(location) && (nextStepIndex == steps.size())) {
+            speaker.speak("You have reached your Destination");
             nextStepIndex++;
         }
 

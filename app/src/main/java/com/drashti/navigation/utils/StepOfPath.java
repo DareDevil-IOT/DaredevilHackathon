@@ -108,7 +108,7 @@ public class StepOfPath {
         Location endLocation = new Location("");
         endLocation.setLatitude(end_location.getLat());
         endLocation.setLongitude(end_location.getLng());
-        return location.distanceTo(endLocation) < 1f;
+        return location.distanceTo(endLocation) < 10f;
     }
 
 
